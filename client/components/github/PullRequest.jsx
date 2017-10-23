@@ -45,6 +45,8 @@ const badge = {
 /* eslint-enable max-len */
 
 const PullRequest = ({ pull }) => {
+  const updateAt = new Date(pull.updated_at);
+
   const classes = ['img-circle'];
   const attributes = {};
 
@@ -79,6 +81,7 @@ const PullRequest = ({ pull }) => {
 
       <div className="text-center github-title ellipsis" title={pull.title}>
         {pull.isTitleDisplayed ? pull.title : ''}
+        <p>{updateAt.getUTCDate()}/{updateAt.getUTCMonth()}/{updateAt.getUTCFullYear()}</p>
       </div>
       <div className="caption text-center github-request-number">
         <a href={pull.html_url} target="_blank" rel="noopener noreferrer">
@@ -103,6 +106,7 @@ PullRequest.propTypes = {
     }),
     comments: PropTypes.number,
     disabled: PropTypes.bool,
+    updated_at: PropTypes.string.isRequired,
     html_url: PropTypes.string.isRequired,
     isTItleDisplayed: PropTypes.bool,
     labels: PropTypes.arrayOf(PropTypes.shape({
